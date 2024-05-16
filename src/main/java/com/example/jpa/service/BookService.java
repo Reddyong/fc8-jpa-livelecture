@@ -23,4 +23,8 @@ public class BookService {
     public Book register(Book book) {
         return bookRepository.save(book);
     }
+
+    public Book findByTitleAndAuthor(String title, String author) {
+        return bookRepository.findByTitleAndAuthor(title, author);
+    }
 }

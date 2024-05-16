@@ -17,7 +17,7 @@ public class RouteController {
 
     private final BookService bookService;
 
-    @GetMapping(path = "list")
+    @GetMapping(path = "/list")
     public String bookList(Model model) {
 
         List<Book> bookList = bookService.getList();
