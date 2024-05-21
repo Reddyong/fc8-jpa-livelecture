@@ -32,5 +32,7 @@ public class Member {
             joinColumns = @JoinColumn(name = "member_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
+
+    // 권한(여러개)
     private Set<Role> roles = new HashSet<>();
 }
