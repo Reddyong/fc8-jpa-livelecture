@@ -26,7 +26,7 @@ public class Member {
     private String email;
 
     // 권한 정보
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "member_roles",
             joinColumns = @JoinColumn(name = "member_id"),

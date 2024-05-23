@@ -23,12 +23,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         Optional<Member> optionalMember = memberRepository.findByUsername(username);
 
-        if (!optionalMember.isPresent()) {
+        if (optionalMember.isEmpty()) {
             throw new UsernameNotFoundException("user not found");
         }
 
         Member member = optionalMember.get();
 
-        return new CustomMember(member);
+        return new CustomMember(member);    // 패스워드 체크 -> SecurityContextHolder
     }
 }

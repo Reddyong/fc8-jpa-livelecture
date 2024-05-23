@@ -6,6 +6,7 @@ import com.example.jpa.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -17,6 +18,7 @@ public class MemberService {
     private final MemberRepository memberRepository;
     private final RoleService roleService;
     private final BCryptPasswordEncoder passwordEncoder;
+
 
     // 회원가입(패스워드 암호화, 권한부여)
     public Member register(Member member) {
