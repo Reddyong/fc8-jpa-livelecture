@@ -1,5 +1,9 @@
 package com.example.jpa.config;
 
+import com.example.jpa.jwt.JwtAuthenticationFilter;
+import com.example.jpa.jwt.JwtAuthorizationFilter;
+import com.example.jpa.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,7 +17,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final MemberRepository memberRepository;
 
     // 1. 비밀번호 암호화 빈 설정
     @Bean
@@ -72,8 +79,10 @@ public class SecurityConfig {
             // AuthenticationManager 얻어오기
             AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
 
-            // UsernamePasswordAuthenticFilter 실행 할 수 있음
-
+            // UsernamePasswordAuthenticationFilter 실행 할 수 있음
+            // login : UsernamePasswordAuthenticationFilter -extends-> ?
+            http.addFilter(new JwtAuthenticationFilter(authenticationManager))
+                    .addFilter(new JwtAuthorizationFilter(authenticationManager, memberRepository));
         }
     }
 }
